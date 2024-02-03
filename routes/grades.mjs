@@ -145,7 +145,19 @@ router.get("/:id", async (req, res) => {
 //     else res.send(result).status(200)
 //   })
 
+// Get a learner's grade data http://127.0.0.1:5050/grades/learner/3
+router.get("/learner/:id", async (req, res) => {
+    const id = Number(req.params.id);
+    try {
+        const grades = await Grade.find({learner_id : id}, 'scores');
 
+        console.log(grades);
+        res.status(200).send(grades);
+    }
+    catch(error){
+        console.error(error);
+    }
+})
 
 // // Delete a learner's grade data
 // router.delete("/learner/:id", async (req, res) => {
