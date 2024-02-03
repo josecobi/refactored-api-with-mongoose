@@ -4,18 +4,13 @@ dotenv.config();
 
 import express from "express";
 
-
 // import mongoose ODM library to work with schemas and validate data before sending or manipulatuing it in the database. This validation only happens at the level of your app. Other apps may not have access to this schema and not follow the same validation system and can mess up the database's document's schema 
 import mongoose from "mongoose";
 
 // connect to mongoDB through mongoose
 await mongoose.connect(process.env.ATLAS_URI);
 
-//Import Grade model where we defined the Schema for grades
-import Grade from "./models/grades.mjs";
-
-
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT;
 const app = express();
 
 // importing our routes from grades.mjs
