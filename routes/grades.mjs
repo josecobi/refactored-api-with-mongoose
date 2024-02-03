@@ -11,9 +11,9 @@ const router = express.Router();
 
 await mongoose.connect(process.env.ATLAS_URI);
 
-router.post('/', async (req, res) => {
+// router.post('/', async (req, res) => {
 
-})
+// })
 // // Create a single grade entry
 // router.post('/', async (req,res) =>{
 //     let collection = await db.collection('grades')
@@ -28,16 +28,46 @@ router.post('/', async (req, res) => {
 //     res.send(result).status(204)
 // })
 
+// get all grades limit 50  testing link: http://127.0.0.1:5050/grades
+router.get("/", async (req, res) => {
+    try{
+    const grades = await Grade.find({}).limit(50);
+    res.status(200).send(grades);
+    }
+    catch(err){
+      console.error(err);
+    }
+})
+
 // // Get a single grade entry
 // router.get("/:id", async (req, res) => {
 //     let collection = await db.collection('grades')
 //     let query = {_id: new ObjectId(req.params.id)}
 //     let result = await collection.findOne(query)
 
+
 //     // minor error handling
 //     if (!result) res.send("Not found").status(404)
 //     else res.send(result).status(200)
 // })
+
+// Get a single grade entry
+// router.get("/id:", async (req, res) => {
+  
+//   const id = req.params.id;
+//   await Grade.findOne({_id: id}).limit(1)
+//   .then((result) => {
+//     console.log(result);
+//   res.status(200).json({data: result});
+
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+  
+// })
+
 
 // // Add a score to a grade entry
 // router.patch("/:id/add", async (req, res) => {
@@ -65,20 +95,30 @@ router.post('/', async (req, res) => {
 //     else res.send(result).status(200)
 //   });
 
-//   // Delete a single grade entry
-//   router.delete("/:id", async (req, res) => {
-//     let collection = await db.collection("grades");
-//     let query = { _id: ObjectId(req.params.id) };
-//     let result = await collection.deleteOne(query);
+  // // Delete a single grade entry
+  // router.delete("/:id", async (req, res) => {
+  //   let collection = await db.collection("grades");
+  //   let query = { _id: ObjectId(req.params.id) };
+  //   let result = await collection.deleteOne(query);
   
-//     if (!result) res.send("Not found").status(404);
-//     else res.send(result).status(200);
-//   });
+  //   if (!result) res.send("Not found").status(404);
+  //   else res.send(result).status(200);
+  // });
+
+// // Delete a single grade entry
+// router.delete("/:id"), async (req, res) => {
+//     const id = req.params.id;
+//     const deletedGrade = await Grade.findByIdAndDelete(id)
+  
+ 
+// }
 
 // // Student/Learner route for backwards compatibility
 // router.get("/student/:id", async (req, res) => {
 //     res.redirect(`../learner/${req.params.id}`)
 //   })
+
+//
 
 // // Get a learner's grade data
 // router.get("/learner/:id", async (req, res) => {
@@ -94,6 +134,8 @@ router.post('/', async (req, res) => {
 //     else res.send(result).status(200)
 //   })
 
+
+
 // // Delete a learner's grade data
 // router.delete("/learner/:id", async (req, res) => {
 //     let collection = await db.collection("grades")
@@ -103,7 +145,7 @@ router.post('/', async (req, res) => {
   
 //     if (!result) res.send("Not found").status(404)
 //     else res.send(result).status(200)
-//   })
+// })
 
 // //Get a class's grade data
 // router.get("/class/:id", async (req,res) => {

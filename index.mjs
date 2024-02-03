@@ -4,8 +4,6 @@ dotenv.config();
 
 import express from "express";
 
-// import db from "./db/conn.mjs";
-
 
 // import mongoose ODM library to work with schemas and validate data before sending or manipulatuing it in the database. This validation only happens at the level of your app. Other apps may not have access to this schema and not follow the same validation system and can mess up the database's document's schema 
 import mongoose from "mongoose";
