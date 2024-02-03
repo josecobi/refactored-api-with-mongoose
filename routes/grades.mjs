@@ -68,6 +68,17 @@ router.get("/", async (req, res) => {
   
 // })
 
+// // Get a grade by Id testing link http://127.0.0.1:5050/grades/56d5f7eb604eb380b0d8d8dd
+router.get("/:id", async (req, res) => {
+    try{
+        const id = req.params.id;
+        const grades = await Grade.findById(id);
+        res.status(200).send(grades);
+    }
+    catch(err){
+        console.error(err);
+    }
+})
 
 // // Add a score to a grade entry
 // router.patch("/:id/add", async (req, res) => {
