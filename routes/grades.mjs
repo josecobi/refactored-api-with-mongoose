@@ -184,6 +184,32 @@ router.get("/learner/:id", async (req, res) => {
 //     else res.send(result).status(200)
 // })
 
+//Get a class's grade data
+router.get("/class/:id", async (req, res) => {
+    try{
+        let  class_id = Number(req.params.id);
+        let query = {class_id: class_id}
+ 
+
+        if(req.query.learner_id){  
+            query.learner_id = req.query.learner_id;
+
+            let class_grades = await Grade.find(query);
+            res.status(200).send(class_grades);
+          } 
+
+        else {         
+            let class_grades = await Grade.find(query);
+
+            res.status(200).send(class_grades);
+        }
+    }
+    catch(err){
+        console.error(err);
+    }   
+  
+});
+
 // // Update a class id
 // router.patch("/class/:id", async (req, res) => {
 //     let collection = await db.collection("grades")
